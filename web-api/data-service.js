@@ -1,0 +1,47 @@
+let vehicleData = [{"id":1,"year":1991,"make":"Lotus","model":"Elan","vin":"WBALW3C54CC691666","price":"$75797.21","image":"http://dummyimage.com/247x100.png/dddddd/000000"},
+{"id":2,"year":2012,"make":"Suzuki","model":"Kizashi","vin":"JN8AF5MR9ET239209","price":"$156916.63","image":"http://dummyimage.com/232x100.png/ff4444/ffffff"},
+{"id":3,"year":2001,"make":"Toyota","model":"Land Cruiser","vin":"KNAGM4AD1D5417953","price":"$191094.28","image":"http://dummyimage.com/147x100.png/dddddd/000000"},
+{"id":4,"year":2007,"make":"Hyundai","model":"Entourage","vin":"WAUCD64BX4N213950","price":"$41450.39","image":"http://dummyimage.com/158x100.png/cc0000/ffffff"},
+{"id":5,"year":1998,"make":"Mitsubishi","model":"Montero Sport","vin":"2LMHJ5AT0EB066916","price":"$173055.05","image":"http://dummyimage.com/177x100.png/dddddd/000000"},
+{"id":6,"year":2008,"make":"BMW","model":"X5","vin":"WBAVA33518F860751","price":"$168950.22","image":"http://dummyimage.com/174x100.png/ff4444/ffffff"},
+{"id":7,"year":1984,"make":"Porsche","model":"944","vin":"WA1LMBFE0BD331134","price":"$84610.67","image":"http://dummyimage.com/156x100.png/ff4444/ffffff"},
+{"id":8,"year":1994,"make":"Mazda","model":"MPV","vin":"WA1VFBFL4DA549972","price":"$167538.49","image":"http://dummyimage.com/218x100.png/ff4444/ffffff"},
+{"id":9,"year":2008,"make":"Volkswagen","model":"Jetta","vin":"1G4HP54K25U585439","price":"$167279.87","image":"http://dummyimage.com/173x100.png/5fa2dd/ffffff"},
+{"id":10,"year":2002,"make":"Isuzu","model":"Rodeo Sport","vin":"1G6DM577380169966","price":"$54439.54","image":"http://dummyimage.com/135x100.png/ff4444/ffffff"},
+{"id":11,"year":1992,"make":"Cadillac","model":"DeVille","vin":"JN8AF5MR7ET247325","price":"$112900.64","image":"http://dummyimage.com/141x100.png/dddddd/000000"},
+{"id":12,"year":2007,"make":"GMC","model":"Sierra","vin":"WBAKE3C54BE864751","price":"$97110.58","image":"http://dummyimage.com/205x100.png/ff4444/ffffff"},
+{"id":13,"year":2002,"make":"Mitsubishi","model":"Challenger","vin":"WA1VMBFE3ED582386","price":"$164197.88","image":"http://dummyimage.com/176x100.png/cc0000/ffffff"},
+{"id":14,"year":2003,"make":"Mitsubishi","model":"Lancer","vin":"WAUKH74FX6N351970","price":"$118503.85","image":"http://dummyimage.com/207x100.png/ff4444/ffffff"},
+{"id":15,"year":1987,"make":"Mercedes-Benz","model":"S-Class","vin":"3VW117AU2FM201154","price":"$163943.27","image":"http://dummyimage.com/207x100.png/cc0000/ffffff"},
+{"id":16,"year":1998,"make":"Honda","model":"Accord","vin":"1N6AA0EC7EN497379","price":"$8142.26","image":"http://dummyimage.com/230x100.png/cc0000/ffffff"},
+{"id":17,"year":2011,"make":"Bentley","model":"Continental GTC","vin":"JH4CL96934C798026","price":"$624.68","image":"http://dummyimage.com/174x100.png/5fa2dd/ffffff"},
+{"id":18,"year":2003,"make":"Lexus","model":"SC","vin":"5NPEB4AC1EH446037","price":"$5608.62","image":"http://dummyimage.com/165x100.png/cc0000/ffffff"},
+{"id":19,"year":2009,"make":"Chevrolet","model":"Express","vin":"WVGAV7AX6AW734940","price":"$83551.19","image":"http://dummyimage.com/229x100.png/cc0000/ffffff"},
+{"id":20,"year":1986,"make":"Pontiac","model":"Sunbird","vin":"1G6DL1E36D0113221","price":"$193091.36","image":"http://dummyimage.com/163x100.png/dddddd/000000"},
+{"id":21,"year":2005,"make":"Acura","model":"RSX","vin":"1GD21ZCG0DZ083235","price":"$112869.83","image":"http://dummyimage.com/114x100.png/dddddd/000000"},
+{"id":22,"year":2005,"make":"Jaguar","model":"XK Series","vin":"JHMZE2H33CS199376","price":"$109738.53","image":"http://dummyimage.com/181x100.png/cc0000/ffffff"},
+{"id":23,"year":1998,"make":"Mitsubishi","model":"Montero","vin":"JTDKTUD32DD518458","price":"$75955.19","image":"http://dummyimage.com/151x100.png/dddddd/000000"},
+{"id":24,"year":1995,"make":"Chevrolet","model":"Suburban 1500","vin":"WDBWK5EA7BF021509","price":"$123740.61","image":"http://dummyimage.com/123x100.png/ff4444/ffffff"},
+{"id":25,"year":1999,"make":"Toyota","model":"Sienna","vin":"5N1AL0MM7DC104865","price":"$97213.23","image":"http://dummyimage.com/148x100.png/5fa2dd/ffffff"},
+{"id":26,"year":2005,"make":"Ford","model":"E150","vin":"WAUAFAFH1CN675835","price":"$189431.53","image":"http://dummyimage.com/191x100.png/ff4444/ffffff"},
+{"id":27,"year":1995,"make":"Mitsubishi","model":"GTO","vin":"4T1BD1EB9EU434636","price":"$4547.42","image":"http://dummyimage.com/229x100.png/5fa2dd/ffffff"},
+{"id":28,"year":2003,"make":"Mazda","model":"B-Series","vin":"JN1AZ4EH5DM694766","price":"$110573.61","image":"http://dummyimage.com/183x100.png/cc0000/ffffff"},
+{"id":29,"year":2011,"make":"Subaru","model":"Tribeca","vin":"YV4952CF7B1493061","price":"$91167.47","image":"http://dummyimage.com/151x100.png/dddddd/000000"},
+{"id":30,"year":1999,"make":"Jaguar","model":"XJ Series","vin":"WA1AY74L98D862092","price":"$41188.59","image":"http://dummyimage.com/154x100.png/dddddd/000000"},
+{"id":31,"year":2007,"make":"Ford","model":"Expedition","vin":"2G61S5S3XF9426329","price":"$50523.02","image":"http://dummyimage.com/191x100.png/ff4444/ffffff"},
+{"id":32,"year":1976,"make":"Chevrolet","model":"Camaro","vin":"KMHGH4JF1BU570288","price":"$14240.17","image":"http://dummyimage.com/234x100.png/5fa2dd/ffffff"},
+{"id":33,"year":1988,"make":"Buick","model":"LeSabre","vin":"2T1BPRHE2FC663786","price":"$189827.79","image":"http://dummyimage.com/197x100.png/5fa2dd/ffffff"},
+{"id":34,"year":1998,"make":"Dodge","model":"Ram Van 1500","vin":"2G4GR5GX5F9670755","price":"$79494.55","image":"http://dummyimage.com/177x100.png/cc0000/ffffff"},
+{"id":35,"year":1992,"make":"Mazda","model":"B-Series Plus","vin":"3C3CFFJH3DT302432","price":"$60928.32","image":"http://dummyimage.com/174x100.png/cc0000/ffffff"},
+{"id":36,"year":2000,"make":"Ford","model":"Explorer Sport Trac","vin":"19XFB2F56CE467969","price":"$152007.21","image":"http://dummyimage.com/150x100.png/ff4444/ffffff"},
+{"id":37,"year":1971,"make":"Chevrolet","model":"Camaro","vin":"5NPEB4AC0BH454805","price":"$14707.22","image":"http://dummyimage.com/151x100.png/dddddd/000000"},
+{"id":38,"year":2002,"make":"Chevrolet","model":"Suburban 1500","vin":"5GALRCED6AJ211250","price":"$189588.27","image":"http://dummyimage.com/150x100.png/dddddd/000000"},
+{"id":39,"year":2001,"make":"Lexus","model":"GS","vin":"1G6DC8EG6A0737026","price":"$153483.54","image":"http://dummyimage.com/198x100.png/ff4444/ffffff"},
+{"id":40,"year":1992,"make":"Daihatsu","model":"Charade","vin":"1G6DJ1E38C0259706","price":"$86233.49","image":"http://dummyimage.com/102x100.png/cc0000/ffffff"}];
+
+module.exports.getAllVehicles = function(){
+    return new Promise(function(resolve,reject){
+            resolve(vehicleData);
+    });
+
+};
