@@ -29,7 +29,7 @@ export default function Vehicles() {
       const maxPrice = event.target.value;
       if(!isNaN(maxPrice))
       {
-        setMaxPrice(value);
+        setMaxPrice(maxPrice);
       }
     };
 
