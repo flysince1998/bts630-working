@@ -28,22 +28,20 @@ export default function Vehicles() {
       setMaxPrice(maxPrice);
     }
   };
+
   const filteredData = data?.filter(vehicle => {
     if (query && !(vehicle.make.toLowerCase().includes(query.toLowerCase()) || vehicle.model.toLowerCase().includes(query.toLowerCase()))) {
       return false;
     }
-    if (minPrice !== '' && parseInt(vehicle.price.replace(/\D/g,'')) < parseInt(minPrice)) {
+    if (typeof minPrice !== 'undefined' && parseFloat(vehicle.price.replace('$','')) < parseFloat(minPrice)) {
       return false;
     }
-    if (maxPrice !== '' && parseInt(vehicle.price.replace(/\D/g,'')) > parseInt(maxPrice)) {
+    if (typeof maxPrice !== 'undefined' && parseFloat(vehicle.price.replace('$','')) > parseFloat(maxPrice)) {
       return false;
     }
     
     return true;
   });
-
-  
-
   return (
     <>
       <Card bg="light">
