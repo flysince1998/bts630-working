@@ -28,20 +28,20 @@ export default function Vehicles() {
       setMaxPrice(maxPrice);
     }
   };
-
   const filteredData = data?.filter(vehicle => {
     if (query && !(vehicle.make.toLowerCase().includes(query.toLowerCase()) || vehicle.model.toLowerCase().includes(query.toLowerCase()))) {
       return false;
     }
-    if (minPrice && parseInt(vehicle.price) < parseInt(minPrice)) {
+    if (minPrice !== '' && parseInt(vehicle.price.replace(/\D/g,'')) < parseInt(minPrice)) {
       return false;
     }
-    if (maxPrice && parseInt(vehicle.price) > parseInt(maxPrice)) {
+    if (maxPrice !== '' && parseInt(vehicle.price.replace(/\D/g,'')) > parseInt(maxPrice)) {
       return false;
     }
     
     return true;
   });
+
   
 
   return (
