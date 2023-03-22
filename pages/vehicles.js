@@ -7,8 +7,8 @@ const fetcher = (url) => fetch(url, { headers: { Authorization: `JWT ${getToken(
 
 export default function Vehicles() {
   const [query, setQuery] = useState('');
-  const [minPrice, setMinPrice] = useState('');
-  const [maxPrice, setMaxPrice] = useState('');
+  const [minPrice, setMinPrice] = useState(null);
+  const [maxPrice, setMaxPrice] = useState(null);
   const { data, error } = useSWR(`https://webapi630.herokuapp.com/api/vehicles`, fetcher);
 
   const handleQueryChange = (event) => {
@@ -18,14 +18,14 @@ export default function Vehicles() {
   const handleMinPriceChange = (event) => {
     const minPrice = event.target.value;
     if (!isNaN(minPrice)) {
-      setMinPrice(minPrice);
+      setMinPrice(parseInt(minPrice));
     }
   };
 
   const handleMaxPriceChange = (event) => {
     const maxPrice = event.target.value;
     if (!isNaN(maxPrice)) {
-      setMaxPrice(maxPrice);
+      setMaxPrice(parseInt(maxPrice));
     }
   };
 
