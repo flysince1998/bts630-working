@@ -33,12 +33,13 @@ export default function Vehicles() {
     if (query && !(vehicle.make.toLowerCase().includes(query.toLowerCase()) || vehicle.model.toLowerCase().includes(query.toLowerCase()))) {
       return false;
     }
-    if (minPrice && parseInt(vehicle.price) < parseInt(minPrice)) {
+    if (typeof minPrice !== 'undefined' && parseInt(vehicle.price) < parseInt(minPrice)) {
       return false;
     }
-    if (maxPrice && parseInt(vehicle.price) > parseInt(maxPrice)) {
+    if (typeof maxPrice !== 'undefined' && parseInt(vehicle.price) > parseInt(maxPrice)) {
       return false;
     }
+    
     return true;
   });
   
