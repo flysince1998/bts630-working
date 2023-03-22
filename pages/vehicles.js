@@ -1,10 +1,3 @@
-import { Card, Table } from "react-bootstrap";
-import { getToken } from "../lib/authenticate";
-import useSWR from 'swr';
-import { useState } from "react";
-
-const fetcher = (url) => fetch(url, { headers: { Authorization: `JWT ${getToken()}` }}).then((res) => res.json());
-
 export default function Vehicles() {
   const [query, setQuery] = useState('');
   const [minPrice, setMinPrice] = useState('');
@@ -42,49 +35,55 @@ export default function Vehicles() {
     
     return true;
   });
+
   return (
     <>
       <Card bg="light">
-  <Card.Body style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '10px' }}>
-    <div>
-      <input type="text" value={query} onChange={handleQueryChange} placeholder="Search Vehicles by make or model" />
-    </div>
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '10px' }}>
-      <div>
-        <input type="number" value={minPrice} onChange={handleMinPriceChange} placeholder="Minimum Price" />
-      </div>
-      <div>
-        <input type="number" value={maxPrice} onChange={handleMaxPriceChange} placeholder="Maximum Price" />
-      </div>
-    </div>
-  </Card.Body>
-</Card>
+        <Card.Body style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '10px' }}>
+          <div>
+            <input type="text" value={query} onChange={handleQueryChange} placeholder="Search Vehicles by make or model" />
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '10px' }}>
+            <div>
+              <input type="number" value={minPrice} onChange={handleMinPriceChange} placeholder="Minimum Price" />
+            </div>
+            <div>
+              <input type="number" value={maxPrice} onChange={handleMaxPriceChange} placeholder="Maximum Price" />
+            </div>
+          </div>
+        </Card.Body>
+      </Card>
 
       <br />
-      <Table striped bordered>
-        <thead>
-          <tr>
-            <th>Year</th>
-            <th>Make</th>
-            <th>Model</th>
-            <th>Vin</th>
-            <th>Price</th>
-            <th>Image</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredData?.map(vehicle => (
-            <tr key={vehicle.id}>
-              <td>{vehicle.year}</td>
-              <td>{vehicle.make}</td>
-              <td>{vehicle.model}</td>
-              <td>{vehicle.vin}</td>
-              <td>{vehicle.price}</td>
-              <td><img src={vehicle.image} alt={vehicle.model} /></td>
+
+      {filteredData?.length > 0 ? (
+        <Table striped bordered>
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Make</th>
+              <th>Model</th>
+              <th>Vin</th>
+              <th>Price</th>
+              <th>Image</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {filteredData?.map(vehicle => (
+              <tr key={vehicle.id}>
+                <td>{vehicle.year}</td>
+                <td>{vehicle.make}</td>
+                <td>{vehicle.model}</td>
+                <td>{vehicle.vin}</td>
+                <td>{vehicle.price}</td>
+                <td><img src={vehicle.image} alt={vehicle.model} /></td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      ) : (
+        <div>No results found</div>
+      )}
     </>
   );
 }
