@@ -64,6 +64,9 @@ export default function Vehicles() {
           </Card.Body>
         </Card>
         <br />
+ {filteredData.length === 0 ? (
+  <p>No results found.</p>
+) : (
         <Table striped bordered>
           <thead>
             <tr>
@@ -89,6 +92,7 @@ export default function Vehicles() {
 
           </tbody>
         </Table>
+)}
       </>
-    )
+    );
 }
