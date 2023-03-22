@@ -7,8 +7,8 @@ const fetcher = (url) => fetch(url, { headers: { Authorization: `JWT ${getToken(
 
 export default function Vehicles() {
   const [query, setQuery] = useState('');
-  const [minPrice, setMinPrice] = useState(null);
-  const [maxPrice, setMaxPrice] = useState(null);
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
   const { data, error } = useSWR(`https://webapi630.herokuapp.com/api/vehicles`, fetcher);
 
   const handleQueryChange = (event) => {
@@ -18,14 +18,14 @@ export default function Vehicles() {
   const handleMinPriceChange = (event) => {
     const minPrice = event.target.value;
     if (!isNaN(minPrice)) {
-      setMinPrice(parseInt(minPrice));
+      setMinPrice(minPrice);
     }
   };
 
   const handleMaxPriceChange = (event) => {
     const maxPrice = event.target.value;
     if (!isNaN(maxPrice)) {
-      setMaxPrice(parseInt(maxPrice));
+      setMaxPrice(maxPrice);
     }
   };
 
@@ -33,10 +33,10 @@ export default function Vehicles() {
     if (query && !(vehicle.make.toLowerCase().includes(query.toLowerCase()) || vehicle.model.toLowerCase().includes(query.toLowerCase()))) {
       return false;
     }
-    if (minPrice !== null && parseInt(vehicle.price) < parseInt(minPrice)) {
+    if (minPrice && parseInt(vehicle.price) < parseInt(minPrice)) {
       return false;
     }
-    if (maxPrice !== null && parseInt(vehicle.price) > parseInt(maxPrice)) {
+    if (maxPrice && parseInt(vehicle.price) > parseInt(maxPrice)) {
       return false;
     }
     
