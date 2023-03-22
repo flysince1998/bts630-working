@@ -47,7 +47,7 @@ export default function Vehicles() {
       <Card bg="light">
   <Card.Body style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '10px' }}>
     <div>
-      <input type="text" value={query} onChange={handleQueryChange} placeholder="Search Vehicles by year, make, model, or vin" />
+      <input type="text" value={query} onChange={handleQueryChange} placeholder="Search Vehicles by make or model" />
     </div>
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '10px' }}>
       <div>
