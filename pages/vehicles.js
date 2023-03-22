@@ -1,3 +1,10 @@
+import { Card, Table } from "react-bootstrap";
+import { getToken } from "../lib/authenticate";
+import useSWR from 'swr';
+import { useState } from "react";
+
+const fetcher = (url) => fetch(url, { headers: { Authorization: `JWT ${getToken()}` }}).then((res) => res.json());
+
 export default function Vehicles() {
   const [query, setQuery] = useState('');
   const [minPrice, setMinPrice] = useState('');
