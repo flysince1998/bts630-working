@@ -29,12 +29,9 @@ export default function Vehicles() {
     }
   };
 
-  const filteredData = data ? data.filter(vehicle => {
-    const searchFields = ['year', 'make', 'model', 'vin'];
-    for (let field of searchFields) {
-      if (vehicle[field] && typeof vehicle[field] === 'string' && vehicle[field].toLowerCase().includes(query.toLowerCase())) {
-        return true;
-      }
+  const filteredData = data?.filter(vehicle => {
+    if (query && !(vehicle.make.toLowerCase().includes(query.toLowerCase()) || vehicle.model.toLowerCase().includes(query.toLowerCase()))) {
+      return false;
     }
     if (minPrice && parseInt(vehicle.price) < parseInt(minPrice)) {
       return false;
@@ -43,7 +40,8 @@ export default function Vehicles() {
       return false;
     }
     return true;
-  }) : [];
+  });
+  
 
   return (
     <>
