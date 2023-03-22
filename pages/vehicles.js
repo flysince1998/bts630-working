@@ -36,7 +36,7 @@ export default function Vehicles() {
      const filteredData = data?.filter(vehicle => {
       const searchFields = ['year', 'make', 'model', 'vin'];
       for(let field of searchFields){
-        if(vehicle[field].toLowerCase().include(query.toLowerCase()))
+        if(vehicle[field].toLowerCase().includes(query.toLowerCase()))
         {
           return true;
         }
