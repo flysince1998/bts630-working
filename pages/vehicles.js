@@ -6,8 +6,8 @@ const fetcher = (url) => fetch(url, { headers: { Authorization: `JWT ${getToken(
 
 export default function Vehicles() {
      const [query,setQuery] = useState('');
-     const [minPrice, setMinPrice] = useState('');
-     const[maxPrice,setMaxPrice] = useState('');
+     const [minPrice, setMinPrice] = useState('0');
+     const[maxPrice,setMaxPrice] = useState('1000000');
     const { data, error } = useSWR(`https://webapi630.herokuapp.com/api/vehicles`, fetcher);
     
     const handleQueryChange = (event) =>
