@@ -7,8 +7,8 @@ const fetcher = (url) => fetch(url, { headers: { Authorization: `JWT ${getToken(
 
 export default function Vehicles() {
   const [query, setQuery] = useState('');
-  const [minPrice, setMinPrice] = useState('0');
-  const [maxPrice, setMaxPrice] = useState('1000000');
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
   const { data, error } = useSWR(`https://webapi630.herokuapp.com/api/vehicles`, fetcher);
 
   const handleQueryChange = (event) => {
@@ -46,14 +46,21 @@ export default function Vehicles() {
   return (
     <>
       <Card bg="light">
-        <Card.Body>
-          <h2>Vehicles</h2>
-          <p>Here are some vehicles available for bidding</p>
-          <input type="text" value={query} onChange={handleQueryChange} placeholder="Search Vehicles by year, make , model or vin" />
-          <input type="number" value={minPrice} onChange={handleMinPriceChange} placeholder="Minimum Price" />
-          <input type="number" value={maxPrice} onChange={handleMaxPriceChange} placeholder="Maximum Price" />
-        </Card.Body>
-      </Card>
+  <Card.Body style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '10px' }}>
+    <div>
+      <input type="text" value={query} onChange={handleQueryChange} placeholder="Search Vehicles by year, make, model, or vin" />
+    </div>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '10px' }}>
+      <div>
+        <input type="number" value={minPrice} onChange={handleMinPriceChange} placeholder="Minimum Price" />
+      </div>
+      <div>
+        <input type="number" value={maxPrice} onChange={handleMaxPriceChange} placeholder="Maximum Price" />
+      </div>
+    </div>
+  </Card.Body>
+</Card>
+
       <br />
       <Table striped bordered>
         <thead>
