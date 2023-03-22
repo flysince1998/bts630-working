@@ -29,7 +29,7 @@ export default function Vehicles() {
     }
   };
 
-  const filteredData = data?.filter(vehicle => {
+  const filteredData = data ? data.filter(vehicle => {
     const searchFields = ['year', 'make', 'model', 'vin'];
     for (let field of searchFields) {
       if (vehicle[field] && typeof vehicle[field] === 'string' && vehicle[field].toLowerCase().includes(query.toLowerCase())) {
@@ -43,8 +43,7 @@ export default function Vehicles() {
       return false;
     }
     return true;
-  });
-  
+  }) : [];
 
   return (
     <>
