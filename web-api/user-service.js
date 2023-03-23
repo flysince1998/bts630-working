@@ -12,7 +12,12 @@ let userSchema = new Schema({
   },
   password: String,
   fullName: String,
-  role: String
+  role: String,
+  // Add the bidCredits field
+  bidCredits: {
+    type: Number,
+    default: 0,
+  }
 });
 
 let User;
@@ -87,3 +92,7 @@ module.exports.checkUser = function (userData) {
         });
     });
 };
+
+module.exports.getUserModel = function() {
+    return User;
+  };

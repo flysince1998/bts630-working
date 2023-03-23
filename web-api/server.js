@@ -2,10 +2,25 @@ const express = require("express");
 const cors = require("cors");
 const userService = require("./user-service.js");
 const dataService = require("./data-service.js");
+const bidCreditsRouter = require('./routes/bidCredits');
 const jwt = require('jsonwebtoken');
 const passport = require("passport");
 const passportJWT = require("passport-jwt");
 const app = express();
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    if (req.method === 'OPTIONS') {
+      res.sendStatus(200);
+    } else {
+      next();
+    }
+  });
+  
+
 
 const HTTP_PORT = process.env.PORT || 8080;
 
@@ -15,7 +30,7 @@ var JwtStrategy = passportJWT.Strategy;
 
 // Configure its options
 var jwtOptions = {};
-jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme("jwt");
+jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 
 // IMPORTANT - this secret should be a long, unguessable string 
 // (ideally stored in a "protected storage" area on the web server).
@@ -46,17 +61,21 @@ passport.use(strategy);
 
 // add passport as application-level middleware
 app.use(passport.initialize());
+app.use('/api/bidCredits', bidCreditsRouter);
 
-app.use(cors());
+
+  
 app.use(express.json());
 
-app.get("/api/vehicles",passport.authenticate('jwt', { session: false }), (req,res)=>{
-    dataService.getAllVehicles().then((data)=>{
+app.get("/api/vehicles", passport.authenticate('jwt', { session: false }), (req, res) => {
+    dataService.getAllVehicles().then((data) => {
         res.json(data);
-    }).catch(()=>{
+    }).catch((err) => {
+        console.error(err); // Log the error to the console
         res.status(500).end();
     });
 });
+
 
 app.post("/api/register", (req,res)=>{
     userService.registerUser(req.body).then(msg=>{
