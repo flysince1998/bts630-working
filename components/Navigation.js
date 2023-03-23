@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from "next/router";
 import { readToken, removeToken } from "../lib/authenticate";
 import React, {useState, useEffect} from 'react';
-import bidCreditService from '../services/bidCredits';
+import { fetchBidCreditBalance } from '../services/bidCredits';
 
 export default function Navigation(props) {
 
@@ -14,7 +14,7 @@ export default function Navigation(props) {
 
   useEffect(() => {
     async function fetchBalance(){
-      const balance = await bidCreditService.fetchBidCreditBalance();
+      const balance = await fetchBidCreditBalance();
       if(balance !== null){
         setBidCredits(balance);
       }
@@ -44,7 +44,7 @@ export default function Navigation(props) {
             <p className="nav-link" style={{ margin: 0 }}>
               Your bid credit balance: {bidCredits}
             </p>
-            <Link href="../pages/recharge" passHref>
+            <Link href="/recharge" passHref legacyBehavior>
               <Nav.Link>Recharge</Nav.Link>
               </Link> 
           </>

@@ -28,4 +28,24 @@ router.get('/balance', passport.authenticate('jwt', { session: false }), async (
   }
 });
 
+router.post('/recharge', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  try {
+    console.log(req.body)
+    const { amount } = req.body;
+    const User = getUserModel(); // Get the User model using getUserModel function
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    const newBalance = user.bidCredits + amount;
+    console.log(newBalance)
+    user.bidCredits = newBalance;
+    await user.save();
+    res.json({ message: 'Bid credits recharged successfully', newBalance });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
+  }
+});
+
+
 module.exports = router;

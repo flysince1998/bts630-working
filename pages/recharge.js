@@ -5,14 +5,15 @@
 
 
 
+
+
   function Recharge() {
     const [amount, setAmount] = useState('');
 
     const handleSubmit = async (e) => {
-      e.preventDefault();
+      e.preventDefault();  
       // Call the API to recharge bid credits with the specified amount
       const updatedBalance = await rechargeBidCredits(amount);
-
       if (updatedBalance !== null) {
         alert('Bid credits successfully recharged');
       }else {

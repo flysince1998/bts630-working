@@ -5,6 +5,7 @@ const dataService = require("./data-service.js");
 const bidCreditsRouter = require('./routes/bidCredits');
 const jwt = require('jsonwebtoken');
 const passport = require("passport");
+const bodyParser = require('body-parser');
 const passportJWT = require("passport-jwt");
 const app = express();
 
@@ -61,11 +62,15 @@ passport.use(strategy);
 
 // add passport as application-level middleware
 app.use(passport.initialize());
-app.use('/api/bidCredits', bidCreditsRouter);
 
 
+// Parse JSON and url-encoded query
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
   
 app.use(express.json());
+
+app.use('/api/bidCredits', bidCreditsRouter);
 
 app.get("/api/vehicles", passport.authenticate('jwt', { session: false }), (req, res) => {
     dataService.getAllVehicles().then((data) => {
