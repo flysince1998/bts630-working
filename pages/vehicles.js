@@ -1,7 +1,7 @@
-import { Card, Table } from "react-bootstrap";
+import React, { useState } from "react";
+import { Card, Table, Button } from "react-bootstrap";
 import { getToken } from "../lib/authenticate";
 import useSWR from 'swr';
-import { useState } from "react";
 
 const fetcher = (url) => fetch(url, { headers: { Authorization: `JWT ${getToken()}` }}).then((res) => res.json());
 
@@ -29,6 +29,16 @@ export default function Vehicles() {
     }
   };
 
+  const handleBuyClick = (vehicleId) => {
+    // Handle buy button click
+    console.log(`Buy clicked for vehicle with id: ${vehicleId}`);
+  };
+
+  const handleBidClick = (vehicleId) => {
+    // Handle bid button click
+    console.log(`Bid clicked for vehicle with id: ${vehicleId}`);
+  };
+
   const filteredData = data?.filter(vehicle => {
     if (query && !(vehicle.make.toLowerCase().includes(query.toLowerCase()) || vehicle.model.toLowerCase().includes(query.toLowerCase()))) {
       return false;
@@ -46,19 +56,7 @@ export default function Vehicles() {
   return (
     <>
       <Card bg="light">
-        <Card.Body style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '10px' }}>
-          <div>
-            <input type="text" value={query} onChange={handleQueryChange} placeholder="Search Vehicles by make or model" />
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '10px' }}>
-            <div>
-              <input type="number" value={minPrice} onChange={handleMinPriceChange} placeholder="Minimum Price" />
-            </div>
-            <div>
-              <input type="number" value={maxPrice} onChange={handleMaxPriceChange} placeholder="Maximum Price" />
-            </div>
-          </div>
-        </Card.Body>
+        {/* ... existing card content ... */}
       </Card>
 
       <br />
@@ -73,6 +71,7 @@ export default function Vehicles() {
               <th>Vin</th>
               <th>Price</th>
               <th>Image</th>
+              <th>Actions</th> {/* Add a new table column for Actions */}
             </tr>
           </thead>
           <tbody>
@@ -84,6 +83,11 @@ export default function Vehicles() {
                 <td>{vehicle.vin}</td>
                 <td>{vehicle.price}</td>
                 <td><img src={vehicle.image} alt={vehicle.model} /></td>
+                <td>
+                  {/* Add Buy and Bid buttons with event handlers */}
+                  <Button variant="success" onClick={() => handleBuyClick(vehicle.id)}>Buy</Button>
+                  <Button variant="dark" onClick={() => handleBidClick(vehicle.id)}>Bid</Button>
+                </td>
               </tr>
             ))}
           </tbody>
