@@ -32,11 +32,13 @@ export default function Vehicles() {
   const handleBuyClick = (vehicleId) => {
     // Handle buy button click
     console.log(`Buy clicked for vehicle with id: ${vehicleId}`);
+    setBuyClicked(true);
   };
 
   const handleBidClick = (vehicleId) => {
     // Handle bid button click
     console.log(`Bid clicked for vehicle with id: ${vehicleId}`);
+    setBidClicked(true);
   };
 
   const filteredData = data?.filter(vehicle => {
