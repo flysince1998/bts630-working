@@ -84,9 +84,23 @@ export default function Vehicles() {
                 <td>{vehicle.price}</td>
                 <td><img src={vehicle.image} alt={vehicle.model} /></td>
                 <td>
-                  {/* Add Buy and Bid buttons with event handlers */}
-                  <Button variant="success" onClick={() => handleBuyClick(vehicle.id)}>Buy</Button>
-                  <Button variant="dark" onClick={() => handleBidClick(vehicle.id)}>Bid</Button>
+                 {/* Add Buy and Bid buttons */}
+              <Button
+                variant="outline-success"
+                onClick={handleBuyClick}
+                onMouseEnter={() => setBuyClicked(false)}
+                className={buyClicked ? "btn btn-success" : "btn-outline-success"}
+              >
+                Buy
+              </Button>
+              <Button
+                variant="outline-dark"
+                onClick={handleBidClick}
+                onMouseEnter={() => setBidClicked(false)}
+                className={bidClicked ? "btn btn-dark" : "btn-outline-dark"}
+              >
+                Bid
+              </Button>
                 </td>
               </tr>
             ))}
