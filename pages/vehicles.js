@@ -9,6 +9,8 @@ export default function Vehicles() {
   const [query, setQuery] = useState('');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
+  const [buyClicked, setBuyClicked] = useState(false); // state to track buy button click
+  const [bidClicked, setBidClicked] = useState(false);
   const { data, error } = useSWR(`https://webapi630.herokuapp.com/api/vehicles`, fetcher);
 
   const handleQueryChange = (event) => {
@@ -58,7 +60,19 @@ export default function Vehicles() {
   return (
     <>
       <Card bg="light">
-        {/* ... existing card content ... */}
+        <Card.Body style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '10px' }}>
+          <div>
+            <input type="text" value={query} onChange={handleQueryChange} placeholder="Search Vehicles by make or model" />
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '10px' }}>
+            <div>
+              <input type="number" value={minPrice} onChange={handleMinPriceChange} placeholder="Minimum Price" />
+            </div>
+            <div>
+              <input type="number" value={maxPrice} onChange={handleMaxPriceChange} placeholder="Maximum Price" />
+            </div>
+          </div>
+        </Card.Body>
       </Card>
 
       <br />
