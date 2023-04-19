@@ -64,18 +64,19 @@ export default function Vehicles() {
     });
   };
 
-  const handleBidClick = (index, event) => {
+  const handleBidClick = (index) => (event) => {
     event.stopPropagation();
     setShowModal(true);
-    setSelectedVehicle(filteredData[index]); // Update with filteredData instead of data
+    setSelectedVehicle(filteredData[index]);
     setSelectedRowIndex(index);
   
-    setBidClicked(prevState => {
+    setBidClicked((prevState) => {
       const newState = [...prevState];
       newState[index] = !newState[index]; // Toggle the boolean value
       return newState;
     });
   };
+  
   
   
 
