@@ -95,7 +95,7 @@ export default function Vehicles() {
             </tr>
           </thead>
           <tbody>
-            {filteredData?.map(vehicle => (
+            {filteredData?.map((vehicle,index) => (
               <tr key={vehicle.id}>
                 <td>{vehicle.year}</td>
                 <td>{vehicle.make}</td>
@@ -129,7 +129,7 @@ export default function Vehicles() {
               >
                 Bid
               </Button>
-                              </td>
+             </td>
               </tr>
             ))}
           </tbody>
