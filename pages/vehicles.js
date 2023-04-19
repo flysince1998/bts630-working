@@ -46,10 +46,10 @@ export default function Vehicles() {
   const handleBidClick = (index, event) => {
     event.stopPropagation();
     setShowModal(true);
-    setSelectedVehicle(data[index]);
-    setSelectedRowIndex(index); // Store the selected row index
+    setSelectedVehicle(filteredData[index]); // Update with filteredData instead of data
+    setSelectedRowIndex(index);
   };
-
+  
   
   const handleModalClose = () => {
     setShowModal(false);
