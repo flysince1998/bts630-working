@@ -9,8 +9,8 @@ export default function Vehicles() {
   const [query, setQuery] = useState('');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
-  const [buyClicked, setBuyClicked] = useState(false); // state to track buy button click
-  const [bidClicked, setBidClicked] = useState(false);
+  const [buyClicked, setBuyClicked] = useState([]); // state to track buy button click
+  const [bidClicked, setBidClicked] = useState([]);
   const { data, error } = useSWR(`https://webapi630.herokuapp.com/api/vehicles`, fetcher);
 
   const handleQueryChange = (event) => {
@@ -31,16 +31,22 @@ export default function Vehicles() {
     }
   };
 
-  const handleBuyClick = (vehicleId) => {
-    // Handle buy button click
-    console.log(`Buy clicked for vehicle with id: ${vehicleId}`);
-    setBuyClicked(true);
+  const handleBuyClick = (index) => {
+    setBuyClicked(prevState => {
+      const newState = [...prevState];
+      newState[index] = true;
+      return newState;
+    });
+    console.log(`Buy clicked for vehicle with id: ${index}`);
   };
 
-  const handleBidClick = (vehicleId) => {
-    // Handle bid button click
-    console.log(`Bid clicked for vehicle with id: ${vehicleId}`);
-    setBidClicked(true);
+  const handleBidClick = (index) => {
+    setBidClicked(prevState => {
+      const newState = [...prevState];
+      newState[index] = true;
+      return newState;
+    });
+    console.log(`Bid clicked for vehicle with id: ${index}`);
   };
 
   const filteredData = data?.filter(vehicle => {
@@ -101,19 +107,28 @@ export default function Vehicles() {
                 <td><img src={vehicle.image} alt={vehicle.model} /></td>
                 <td>
                  {/* Add Buy and Bid buttons */}
+              {/* Add Buy and Bid buttons */}
               <Button
                 variant="outline-success"
-                onClick={handleBuyClick}
-                onMouseEnter={() => setBuyClicked(false)}
-                className={buyClicked ? "btn btn-success" : "btn-outline-success"}
+                onClick={() => handleBuyClick(index)}
+                onMouseEnter={() => setBuyClicked(prevState => {
+                  const newState = [...prevState];
+                  newState[index] = false;
+                  return newState;
+                })}
+                className={buyClicked[index] ? "btn btn-success" : "btn-outline-success"}
               >
                 Buy
               </Button>
               <Button
                 variant="outline-dark"
-                onClick={handleBidClick}
-                onMouseEnter={() => setBidClicked(false)}
-                className={bidClicked ? "btn btn-dark" : "btn-outline-dark"}
+                onClick={() => handleBidClick(index)}
+                onMouseEnter={() => setBidClicked(prevState => {
+                  const newState = [...prevState];
+                  newState[index] = false;
+                  return newState;
+                })}
+                className={bidClicked[index] ? "btn btn-dark" : "btn-outline-dark"}
               >
                 Bid
               </Button>
