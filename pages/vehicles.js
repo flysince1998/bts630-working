@@ -75,6 +75,7 @@ export default function Vehicles() {
       newState[index] = !newState[index]; // Toggle the boolean value
       return newState;
     });
+    console.log("handleBidClick executed");
   };
   
   
@@ -186,7 +187,7 @@ export default function Vehicles() {
       ) : (
         <div>No results found</div>
       )}
-           <Modal show={showModal} onHide={handleModalClose}>
+          <Modal show={showModal} onHide={() => setShowModal(false)}>
          <Modal.Header closeButton>
            <Modal.Title>Place Bid</Modal.Title>
          </Modal.Header>
