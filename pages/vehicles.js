@@ -9,13 +9,20 @@ export default function Vehicles() {
   const [query, setQuery] = useState('');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
-  const [buyClicked, setBuyClicked] = useState(new Array(filteredData?.length).fill(false));
-  const [bidClicked, setBidClicked] = useState(new Array(filteredData?.length).fill(false));
+  const [buyClicked, setBuyClicked] = useState([]);
+  const [bidClicked, setBidClicked] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [bidAmount, setBidAmount] = useState("");
   const [selectedRowIndex, setSelectedRowIndex] = useState(null); 
   const { data, error } = useSWR(`https://webapi630.herokuapp.com/api/vehicles`, fetcher);
+
+  useEffect(() => {
+    if (data) {
+      setBuyClicked(new Array(data.length).fill(false));
+      setBidClicked(new Array(data.length).fill(false));
+    }
+  }, [data]);
 
   const filteredData = data?.filter(vehicle => {
     if (query && !(vehicle.make.toLowerCase().includes(query.toLowerCase()) || vehicle.model.toLowerCase().includes(query.toLowerCase()))) {
@@ -30,7 +37,7 @@ export default function Vehicles() {
     
     return true;
   });
-  
+
   const handleQueryChange = (event) => {
     setQuery(event.target.value);
   };
