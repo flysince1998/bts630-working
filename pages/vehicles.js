@@ -67,7 +67,7 @@ export default function Vehicles() {
       setBuyClicked(new Array(filteredData?.length).fill(false)); // Reset buyClicked state array
       setBidClicked(new Array(filteredData?.length).fill(false)); // Reset bidClicked state array
     };    
-  };
+
 
   const handleBidSubmit = () => {
     // Handle Bid submit logic here
