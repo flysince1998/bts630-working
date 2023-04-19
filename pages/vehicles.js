@@ -17,6 +17,20 @@ export default function Vehicles() {
   const [selectedRowIndex, setSelectedRowIndex] = useState(null); 
   const { data, error } = useSWR(`https://webapi630.herokuapp.com/api/vehicles`, fetcher);
 
+  const filteredData = data?.filter(vehicle => {
+    if (query && !(vehicle.make.toLowerCase().includes(query.toLowerCase()) || vehicle.model.toLowerCase().includes(query.toLowerCase()))) {
+      return false;
+    }
+    if (typeof minPrice !== 'undefined' && parseFloat(vehicle.price.replace('$','')) < parseFloat(minPrice)) {
+      return false;
+    }
+    if (typeof maxPrice !== 'undefined' && parseFloat(vehicle.price.replace('$','')) > parseFloat(maxPrice)) {
+      return false;
+    }
+    
+    return true;
+  });
+  
   const handleQueryChange = (event) => {
     setQuery(event.target.value);
   };
@@ -83,19 +97,7 @@ export default function Vehicles() {
     handleModalClose();
   };
 
-  const filteredData = data?.filter(vehicle => {
-    if (query && !(vehicle.make.toLowerCase().includes(query.toLowerCase()) || vehicle.model.toLowerCase().includes(query.toLowerCase()))) {
-      return false;
-    }
-    if (typeof minPrice !== 'undefined' && parseFloat(vehicle.price.replace('$','')) < parseFloat(minPrice)) {
-      return false;
-    }
-    if (typeof maxPrice !== 'undefined' && parseFloat(vehicle.price.replace('$','')) > parseFloat(maxPrice)) {
-      return false;
-    }
-    
-    return true;
-  });
+
 
   return (
     <>
