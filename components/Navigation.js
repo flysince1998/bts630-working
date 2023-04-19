@@ -2,11 +2,26 @@ import { Container, Navbar, Nav } from "react-bootstrap";
 import Link from 'next/link';
 import { useRouter } from "next/router";
 import { readToken, removeToken } from "../lib/authenticate";
+import React, {useState, useEffect} from 'react';
+import { fetchBidCreditBalance } from '../services/bidCredits';
 
 export default function Navigation(props) {
 
+  const [bidCredits, setBidCredits] = useState(0);
   const router = useRouter();
   let token = readToken();
+
+
+  useEffect(() => {
+    async function fetchBalance(){
+      const balance = await fetchBidCreditBalance();
+      if(balance !== null){
+        setBidCredits(balance);
+      }
+    }
+    fetchBalance();
+  }, []);
+  
 
   function logout() {
     removeToken();
@@ -23,6 +38,18 @@ export default function Navigation(props) {
             <Link href="/" passHref legacyBehavior ><Nav.Link>Home</Nav.Link></Link>
             {token && <Link href="/vehicles" passHref legacyBehavior><Nav.Link>Products</Nav.Link></Link>}
           </Nav>
+          <Nav className="mx-auto">
+          {token && (
+            <>
+            <p className="nav-link" style={{ margin: 0 }}>
+              Your bid credit balance: {bidCredits}
+            </p>
+            <Link href="/recharge" passHref legacyBehavior>
+              <Nav.Link>Recharge</Nav.Link>
+              </Link> 
+          </>
+          )}
+        </Nav>
           <Nav className="ml-auto">
             {!token && <Link href="/login" passHref legacyBehavior><Nav.Link>Login</Nav.Link></Link>}
             {token && <Nav.Link onClick={logout}>Logout</Nav.Link>}
