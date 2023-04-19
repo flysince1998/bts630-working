@@ -9,8 +9,8 @@ export default function Vehicles() {
   const [query, setQuery] = useState('');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
-  const [buyClicked, setBuyClicked] = useState([]); // state to track buy button click
-  const [bidClicked, setBidClicked] = useState([]);
+  const [buyClicked, setBuyClicked] = useState(new Array(filteredData?.length).fill(false));
+  const [bidClicked, setBidClicked] = useState(new Array(filteredData?.length).fill(false));
   const [showModal, setShowModal] = useState(false);
   const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [bidAmount, setBidAmount] = useState("");
@@ -48,14 +48,25 @@ export default function Vehicles() {
     setShowModal(true);
     setSelectedVehicle(filteredData[index]); // Update with filteredData instead of data
     setSelectedRowIndex(index);
+  
+    setBidClicked(prevState => {
+      const newState = [...prevState];
+      newState[index] = !newState[index]; // Toggle the boolean value
+      return newState;
+    });
   };
   
   
   const handleModalClose = () => {
-    setShowModal(false);
-    setSelectedVehicle(null);
-    setBidAmount("");
-    setSelectedRowIndex(null); // Reset the selected row index
+    const handleModalClose = () => {
+      setShowModal(false);
+      setSelectedVehicle(null);
+      setBidAmount("");
+      setSelectedRowIndex(null); // Reset the selected row index
+    
+      setBuyClicked(new Array(filteredData?.length).fill(false)); // Reset buyClicked state array
+      setBidClicked(new Array(filteredData?.length).fill(false)); // Reset bidClicked state array
+    };    
   };
 
   const handleBidSubmit = () => {
