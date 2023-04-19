@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Table, Button } from "react-bootstrap";
+import { Card, Table, Button, Modal, Form } from "react-bootstrap";
 import { getToken } from "../lib/authenticate";
 import useSWR from 'swr';
 
@@ -11,6 +11,10 @@ export default function Vehicles() {
   const [maxPrice, setMaxPrice] = useState('');
   const [buyClicked, setBuyClicked] = useState([]); // state to track buy button click
   const [bidClicked, setBidClicked] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedVehicle, setSelectedVehicle] = useState(null);
+  const [bidAmount, setBidAmount] = useState("");
+  const [selectedRowIndex, setSelectedRowIndex] = useState(null); 
   const { data, error } = useSWR(`https://webapi630.herokuapp.com/api/vehicles`, fetcher);
 
   const handleQueryChange = (event) => {
@@ -39,12 +43,25 @@ export default function Vehicles() {
     });
   };
 
-  const handleBidClick = (index) => {
-    setBidClicked(prevState => {
-      const newState = [...prevState];
-      newState[index] = !newState[index]; // Toggle the boolean value
-      return newState;
-    });
+  const handleBidClick = (index, event) => {
+    event.stopPropagation();
+    setShowModal(true);
+    setSelectedVehicle(data[index]);
+    setSelectedRowIndex(index); // Store the selected row index
+  };
+
+  
+  const handleModalClose = () => {
+    setShowModal(false);
+    setSelectedVehicle(null);
+    setBidAmount("");
+    setSelectedRowIndex(null); // Reset the selected row index
+  };
+
+  const handleBidSubmit = () => {
+    // Handle Bid submit logic here
+    // ...
+    handleModalClose();
   };
 
   const filteredData = data?.filter(vehicle => {
@@ -134,9 +151,37 @@ export default function Vehicles() {
             ))}
           </tbody>
         </Table>
+
+       
+        
       ) : (
         <div>No results found</div>
       )}
+           <Modal show={showModal} onHide={handleModalClose}>
+         <Modal.Header closeButton>
+           <Modal.Title>Place Bid</Modal.Title>
+         </Modal.Header>
+         <Modal.Body>
+           <Form>
+             <Form.Group controlId="bidAmount">
+               <Form.Label>Bid Amount</Form.Label>
+               <Form.Control
+                 type="number"
+                 value={bidAmount}
+                 onChange={(e) => setBidAmount(e.target.value)}
+               />
+             </Form.Group>
+           </Form>
+         </Modal.Body>
+         <Modal.Footer>
+           <Button variant="secondary" onClick={handleModalClose}>
+             Close
+           </Button>
+           <Button variant="primary" onClick={handleBidSubmit}>
+             Submit Bid
+           </Button>
+         </Modal.Footer>
+       </Modal>
     </>
   );
 }
