@@ -69,9 +69,17 @@ export default function Vehicles() {
     };    
 
 
-  const handleBidSubmit = () => {
-    // Handle Bid submit logic here
-    // ...
+
+    const handleBidSubmit = () => {
+      // Get the selected vehicle and bid amount
+      const vehicle = filteredData[selectedRowIndex];
+      const amount = parseFloat(bidAmount);
+      
+      // Check if bid amount is valid
+      if (isNaN(amount) || amount <= parseFloat(vehicle.price.replace('$',''))) {
+        alert("Invalid bid amount");
+        return;
+      }
     handleModalClose();
   };
 
