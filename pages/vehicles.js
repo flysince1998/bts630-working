@@ -57,7 +57,7 @@ export default function Vehicles() {
   };
   
   
-  const handleModalClose = () => {
+
     const handleModalClose = () => {
       setShowModal(false);
       setSelectedVehicle(null);
