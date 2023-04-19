@@ -34,19 +34,17 @@ export default function Vehicles() {
   const handleBuyClick = (index) => {
     setBuyClicked(prevState => {
       const newState = [...prevState];
-      newState[index] = true;
+      newState[index] = !newState[index]; // Toggle the boolean value
       return newState;
     });
-    console.log(`Buy clicked for vehicle with id: ${index}`);
   };
 
   const handleBidClick = (index) => {
     setBidClicked(prevState => {
       const newState = [...prevState];
-      newState[index] = true;
+      newState[index] = !newState[index]; // Toggle the boolean value
       return newState;
     });
-    console.log(`Bid clicked for vehicle with id: ${index}`);
   };
 
   const filteredData = data?.filter(vehicle => {
@@ -107,8 +105,7 @@ export default function Vehicles() {
                 <td><img src={vehicle.image} alt={vehicle.model} /></td>
                 <td>
                  {/* Add Buy and Bid buttons */}
-              {/* Add Buy and Bid buttons */}
-              <Button
+                 <Button
                 variant="outline-success"
                 onClick={() => handleBuyClick(index)}
                 onMouseEnter={() => setBuyClicked(prevState => {
@@ -132,7 +129,7 @@ export default function Vehicles() {
               >
                 Bid
               </Button>
-                </td>
+                              </td>
               </tr>
             ))}
           </tbody>
